@@ -21,7 +21,7 @@
     become: yes
     become_method: sudo
   - name: chmod
-    file: path=/opt/apache-maven-3.3.9-bin.tar.gz mode=0755
+    file: path=/opt/sveta/apache-maven-3.3.9-bin.tar.gz mode=0755
     become: yes
     become_method: sudo
   - name: link
