@@ -17,6 +17,29 @@
     become: yes
     become_method: sudo
   - name: install maven
-    unarchive: src=/opt/sveta/apache-maven-3.3.9-bin.tar.gz dest=/opt/sveta
+    unarchive: src=/opt/sveta/apache-maven-3.3.9-bin.tar.gz dest=/opt
     become: yes
     become_method: sudo
+  - name: chmod
+    file: path=/opt/apache-maven-3.3.9-bin.tar.gz mode=0755
+    become: yes
+    become_method: sudo
+  - name: link
+    file: src=/opt/apache-maven-3.3.9 dest=/usr/local/maven owner=root group=root state=link
+    become: yes
+    become_method: sudo
+  - name: env M2_HOME
+    shell: echo M2_HOME is $M2_HOME
+    environment:
+      M2_HOME: /usr/local/maven
+    register: shellout
+    become: yes
+    become_method: sudo
+  - name: env PATH
+    shell: echo PATH is $PATH
+    environment:
+      PATH: /usr/local/maven/bin:${PATH}
+    register: shellout
+    become: yes
+    become_method: sudo
+
