@@ -9,6 +9,14 @@
     become: yes
     become_method: sudo
   - name: clone course files
-    git: repo=https://github.com/SvetlanaLarin/course_files.git dest=/opt/sveta/course_files
+    git: repo=https://github.com/SvetlanaLarin/course_files.git dest=/opt/sveta/course_files update=no
+    become: yes
+    become_method: sudo
+  - name: download maven
+    get_url: url=http://apache.spd.co.il/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz dest=/opt/sveta/apache-maven-3.3.9-bin.tar.gz
+    become: yes
+    become_method: sudo
+  - name: install maven
+    unarchive: src=/opt/sveta/apache-maven-3.3.9-bin.tar.gz dest=/opt/sveta
     become: yes
     become_method: sudo
